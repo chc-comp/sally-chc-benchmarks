@@ -1,0 +1,6 @@
+;; prop1
+(query T
+      (and
+        (or (not (< 1 old)) ht!0!assimilated)
+        (or (not (< 2 old)) ht!1!assimilated)
+        (or (not (< 3 old)) ht!2!assimilated)))

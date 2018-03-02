@@ -1,0 +1,432 @@
+;; State type:
+;;  cx!i!j: channel from process i to relay j
+;;  cy!i!j: channel from relay j to process i
+;;  good_p!i: true if process i is non-faulty
+;;  good_r!j: true if relay k is non-faulty
+;;  v!i: result produced by process i
+;;  round: global round counter
+;;
+;; Encoding:
+;;  channels store a real value. We encode "nothing sent" as 0.
+;;
+;; Parameters:
+;;  source: id of the source process (integer between 1 and 4)
+;;  val: value sent by the source, if its not faulty.
+;;  val is assumed non-zero.
+;;
+
+(define-state-type state
+  ((cx!0!0 Real)
+   (cx!0!1 Real)
+   (cx!0!2 Real)
+   (cx!0!3 Real)
+   (cx!0!4 Real)
+   (cx!1!0 Real)
+   (cx!1!1 Real)
+   (cx!1!2 Real)
+   (cx!1!3 Real)
+   (cx!1!4 Real)
+   (cx!2!0 Real)
+   (cx!2!1 Real)
+   (cx!2!2 Real)
+   (cx!2!3 Real)
+   (cx!2!4 Real)
+   (cy!0!0 Real)
+   (cy!0!1 Real)
+   (cy!0!2 Real)
+   (cy!0!3 Real)
+   (cy!0!4 Real)
+   (cy!1!0 Real)
+   (cy!1!1 Real)
+   (cy!1!2 Real)
+   (cy!1!3 Real)
+   (cy!1!4 Real)
+   (cy!2!0 Real)
+   (cy!2!1 Real)
+   (cy!2!2 Real)
+   (cy!2!3 Real)
+   (cy!2!4 Real)
+   (good_p!0 Bool)
+   (good_p!1 Bool)
+   (good_p!2 Bool)
+   (good_r!0 Bool)
+   (good_r!1 Bool)
+   (good_r!2 Bool)
+   (good_r!3 Bool)
+   (good_r!4 Bool)
+   (v!0 Real)
+   (v!1 Real)
+   (v!2 Real)
+   (round Real)
+   ;; parameters
+   (source Real)
+   (val Real)))
+
+;;
+;; Initial state
+;;
+(define-states init state
+  (and
+   (= round 0)
+   (= cx!0!0 0)
+   (= cx!0!1 0)
+   (= cx!0!2 0)
+   (= cx!0!3 0)
+   (= cx!0!4 0)
+   (= cx!1!0 0)
+   (= cx!1!1 0)
+   (= cx!1!2 0)
+   (= cx!1!3 0)
+   (= cx!1!4 0)
+   (= cx!2!0 0)
+   (= cx!2!1 0)
+   (= cx!2!2 0)
+   (= cx!2!3 0)
+   (= cx!2!4 0)
+   (= cy!0!0 0)
+   (= cy!0!1 0)
+   (= cy!0!2 0)
+   (= cy!0!3 0)
+   (= cy!0!4 0)
+   (= cy!1!0 0)
+   (= cy!1!1 0)
+   (= cy!1!2 0)
+   (= cy!1!3 0)
+   (= cy!1!4 0)
+   (= cy!2!0 0)
+   (= cy!2!1 0)
+   (= cy!2!2 0)
+   (= cy!2!3 0)
+   (= cy!2!4 0)
+   ;;
+   ;; Constraints on val and source
+   ;;
+   (or (= source 1) (= source 2) (= source 3))
+   (not (= val 0))
+   ;;
+   ;; Fault model
+   ;;
+   (and good_p!0 good_p!1 good_p!2)
+   (or
+    (and (not good_r!0) good_r!1 good_r!2 good_r!3 good_r!4)
+    (and (not good_r!1) good_r!0 good_r!2 good_r!3 good_r!4)
+    (and (not good_r!2) good_r!0 good_r!1 good_r!3 good_r!4)
+    (and (not good_r!3) good_r!0 good_r!1 good_r!2 good_r!4)
+    (and (not good_r!4) good_r!0 good_r!1 good_r!2 good_r!3))))
+
+;;
+;; Transition relation
+;; 
+(define-transition trans state
+  (let ((cond!1 (= source 2))
+	(cond!2 (= source 3))
+	(cs!252 (not good_p!1))
+	(cs!258 (not good_p!2))
+	(cs!264
+	 (and
+	  (= cx!0!0' cx!0!0)
+	  (= cx!0!1' cx!0!1)
+	  (= cx!0!2' cx!0!2)
+	  (= cx!0!3' cx!0!3)
+	  (= cx!0!4' cx!0!4)
+	  (= cx!1!0' cx!1!0)
+	  (= cx!1!1' cx!1!1)
+	  (= cx!1!2' cx!1!2)
+	  (= cx!1!3' cx!1!3)
+	  (= cx!1!4' cx!1!4)
+	  (= cx!2!0' cx!2!0)
+	  (= cx!2!1' cx!2!1)
+	  (= cx!2!2' cx!2!2)
+	  (= cx!2!3' cx!2!3)
+	  (= cx!2!4' cx!2!4)))
+	(cs!265
+	 (and
+	  (= cy!0!0' cy!0!0)
+	  (= cy!0!1' cy!0!1)
+	  (= cy!0!2' cy!0!2)
+	  (= cy!0!3' cy!0!3)
+	  (= cy!0!4' cy!0!4)
+	  (= cy!1!0' cy!1!0)
+	  (= cy!1!1' cy!1!1)
+	  (= cy!1!2' cy!1!2)
+	  (= cy!1!3' cy!1!3)
+	  (= cy!1!4' cy!1!4)
+	  (= cy!2!0' cy!2!0)
+	  (= cy!2!1' cy!2!1)
+	  (= cy!2!2' cy!2!2)
+	  (= cy!2!3' cy!2!3)
+	  (= cy!2!4' cy!2!4)))
+	(cs!266
+	 (and
+	  (= good_p!0' good_p!0)
+	  (= good_p!1' good_p!1)
+	  (= good_p!2' good_p!2)))
+	(cs!267
+	 (and
+	  (= good_r!0' good_r!0)
+	  (= good_r!1' good_r!1)
+	  (= good_r!2' good_r!2)
+	  (= good_r!3' good_r!3)
+	  (= good_r!4' good_r!4)))
+	(cs!268 (and (= v!0' v!0) (= v!1' v!1) (= v!2' v!2)))
+	(cs!284 (not good_r!0))
+	(cs!286 (not good_r!1))
+	(cs!288 (not good_r!2))
+	(cs!290 (not good_r!3))
+	(cs!302 (not good_r!4))
+	(cs!309 (not good_p!0)))
+    (let ((cs!285
+	   (cond (cond!2 cx!2!0) (cond!1 cx!1!0) (else cx!0!0)))
+	  (cs!287
+	   (cond (cond!2 cx!2!1) (cond!1 cx!1!1) (else cx!0!1)))
+	  (cs!289
+	   (cond (cond!2 cx!2!2) (cond!1 cx!1!2) (else cx!0!2)))
+	  (cs!291
+	   (cond (cond!2 cx!2!3) (cond!1 cx!1!3) (else cx!0!3)))
+	  (cs!308
+	   (cond (cond!2 cx!2!4) (cond!1 cx!1!4) (else cx!0!4))))
+      (let ((new_k!11 (ite (= cy!0!3 cy!0!4) 2 0))
+	    (new_k!17 (ite (= cy!1!3 cy!1!4) 2 0))
+	    (new_k!23 (ite (= cy!2!3 cy!2!4) 2 0)))
+	(let ((cs!310 (= new_k!11 0))
+	      (cs!312 (= new_k!17 0))
+	      (cs!314 (= new_k!23 0)))
+	  (let ((new_k!12
+		 (cond
+		  (cs!310 1)
+		  ((= cy!0!2 cy!0!4) (+ new_k!11 1))
+		  (else (- new_k!11 1))))
+		(new_x!6 (ite cs!310 cy!0!2 cy!0!4))
+		(new_k!18
+		 (cond
+		  (cs!312 1)
+		  ((= cy!1!2 cy!1!4) (+ new_k!17 1))
+		  (else (- new_k!17 1))))
+		(new_x!7 (ite cs!312 cy!1!2 cy!1!4))
+		(new_k!24
+		 (cond
+		  (cs!314 1)
+		  ((= cy!2!2 cy!2!4) (+ new_k!23 1))
+		  (else (- new_k!23 1))))
+		(new_x!8 (ite cs!314 cy!2!2 cy!2!4)))
+	    (let ((cs!311 (= new_k!12 0))
+		  (cs!313 (= new_k!18 0))
+		  (cs!315 (= new_k!24 0)))
+	      (let ((x!14
+		     (cond
+		      ((=
+			(cond
+			 (cs!311 1)
+			 ((= cy!0!1 new_x!6) (+ new_k!12 1))
+			 (else (- new_k!12 1)))
+			0)
+		       cy!0!0)
+		      (cs!311 cy!0!1)
+		      (else new_x!6)))
+		    (x!15
+		     (cond
+		      ((=
+			(cond
+			 (cs!313 1)
+			 ((= cy!1!1 new_x!7) (+ new_k!18 1))
+			 (else (- new_k!18 1)))
+			0)
+		       cy!1!0)
+		      (cs!313 cy!1!1)
+		      (else new_x!7)))
+		    (x!16
+		     (cond
+		      ((=
+			(cond
+			 (cs!315 1)
+			 ((= cy!2!1 new_x!8) (+ new_k!24 1))
+			 (else (- new_k!24 1)))
+			0)
+		       cy!2!0)
+		      (cs!315 cy!2!1)
+		      (else new_x!8))))
+		(let ((new_k!13 (ite (= cy!0!4 x!14) 2 3))
+		      (new_k!19 (ite (= cy!1!4 x!15) 2 3))
+		      (new_k!25 (ite (= cy!2!4 x!16) 2 3)))
+		  (let ((new_k!14
+			 (ite (= cy!0!3 x!14) (- new_k!13 1) new_k!13))
+			(new_k!20 (ite (= cy!1!3 x!15) (- new_k!19 1) new_k!19))
+			(new_k!26
+			 (ite (= cy!2!3 x!16) (- new_k!25 1) new_k!25)))
+		    (let ((new_k!15
+			   (ite (= cy!0!2 x!14) (- new_k!14 1) new_k!14))
+			  (new_k!21 (ite (= cy!1!2 x!15) (- new_k!20 1) new_k!20))
+			  (new_k!27
+			   (ite (= cy!2!2 x!16) (- new_k!26 1) new_k!26)))
+		      (let ((new_k!16
+			     (ite (= cy!0!1 x!14) (- new_k!15 1) new_k!15))
+			    (new_k!22 (ite (= cy!1!1 x!15) (- new_k!21 1) new_k!21))
+			    (new_k!28
+			     (ite (= cy!2!1 x!16) (- new_k!27 1) new_k!27)))
+			(and
+			 (= source' source)
+			 (= val' val)
+			 (or
+			  (and
+			   (= round 0)
+			   (and
+			    (or
+			     cs!309
+			     (/= 1 source)
+			     (and
+			      (= cx!0!0' val)
+			      (= cx!0!1' val)
+			      (= cx!0!2' val)
+			      (= cx!0!3' val)
+			      (= cx!0!4' val)))
+			    (or
+			     cs!252
+			     (/= 2 source)
+			     (and
+			      (= cx!1!0' val)
+			      (= cx!1!1' val)
+			      (= cx!1!2' val)
+			      (= cx!1!3' val)
+			      (= cx!1!4' val)))
+			    (or
+			     cs!258
+			     (/= 3 source)
+			     (and
+			      (= cx!2!0' val)
+			      (= cx!2!1' val)
+			      (= cx!2!2' val)
+			      (= cx!2!3' val)
+			      (= cx!2!4' val)))
+			    (or
+			     cs!309
+			     (= 1 source)
+			     (and
+			      (= cx!0!0' 0)
+			      (= cx!0!1' 0)
+			      (= cx!0!2' 0)
+			      (= cx!0!3' 0)
+			      (= cx!0!4' 0)))
+			    (or
+			     cs!252
+			     (= 2 source)
+			     (and
+			      (= cx!1!0' 0)
+			      (= cx!1!1' 0)
+			      (= cx!1!2' 0)
+			      (= cx!1!3' 0)
+			      (= cx!1!4' 0)))
+			    (or
+			     cs!258
+			     (= 3 source)
+			     (and
+			      (= cx!2!0' 0)
+			      (= cx!2!1' 0)
+			      (= cx!2!2' 0)
+			      (= cx!2!3' 0)
+			      (= cx!2!4' 0))))
+			   (= round' 1)
+			   cs!265
+			   cs!266
+			   cs!267
+			   cs!268)
+			  (and
+			   (= round 1)
+			   (and
+			    (or cs!284 (= cy!0!0' cs!285))
+			    (or cs!284 (= cy!1!0' cs!285))
+			    (or cs!284 (= cy!2!0' cs!285))
+			    (or cs!286 (= cy!0!1' cs!287))
+			    (or cs!286 (= cy!1!1' cs!287))
+			    (or cs!286 (= cy!2!1' cs!287))
+			    (or cs!288 (= cy!0!2' cs!289))
+			    (or cs!288 (= cy!1!2' cs!289))
+			    (or cs!288 (= cy!2!2' cs!289))
+			    (or cs!290 (= cy!0!3' cs!291))
+			    (or cs!290 (= cy!1!3' cs!291))
+			    (or cs!290 (= cy!2!3' cs!291))
+			    (or cs!302 (= cy!0!4' cs!308))
+			    (or cs!302 (= cy!1!4' cs!308))
+			    (or cs!302 (= cy!2!4' cs!308)))
+			   (= round' 2)
+			   cs!264
+			   cs!266
+			   cs!267
+			   cs!268)
+			  (and
+			   (= round 2)
+			   (and
+			    (or
+			     cs!309
+			     (=
+			      v!0'
+			      (ite (or
+				    (= new_k!13 0)
+				    (= new_k!14 0)
+				    (= new_k!15 0)
+				    (= new_k!16 0)
+				    (= (ite (= cy!0!0 x!14) (- new_k!16 1) new_k!16) 0))
+				   x!14
+				   0)))
+			    (or
+			     cs!252
+			     (=
+			      v!1'
+			      (ite (or
+				    (= new_k!19 0)
+				    (= new_k!20 0)
+				    (= new_k!21 0)
+				    (= new_k!22 0)
+				    (= (ite (= cy!1!0 x!15) (- new_k!22 1) new_k!22) 0))
+				   x!15
+				   0)))
+			    (or
+			     cs!258
+			     (=
+			      v!2'
+			      (ite (or
+				    (= new_k!25 0)
+				    (= new_k!26 0)
+				    (= new_k!27 0)
+				    (= new_k!28 0)
+				    (= (ite (= cy!2!0 x!16) (- new_k!28 1) new_k!28) 0))
+				   x!16
+				   0))))
+			   (= round' 3)
+			   cs!264
+			   cs!265
+			   cs!266
+			   cs!267)
+			  (and
+			   (= round 3)
+			   cs!264
+			   cs!265
+			   cs!266
+			   cs!267
+			   (= round' round)
+			   cs!268)))))))))))))))
+
+;;
+;; Transition system
+;;
+(define-transition-system OM
+  state
+  init
+  trans
+)
+
+;;
+;; Query: validity
+;;
+(query OM
+       (or
+        (not
+	 (cond
+	  ((= source 3) good_p!2)
+	  ((= source 2) good_p!1)
+	  (else good_p!0)))
+        (< round 3)
+        (and
+	 (or (not good_p!0) (= v!0 val))
+	 (or (not good_p!1) (= v!1 val))
+	 (or (not good_p!2) (= v!2 val)))))
+

@@ -1,0 +1,375 @@
+;; lemma8a
+(query T
+      (and
+        (<=
+          (cond
+            ((= old 3) ht!2!num_entries)
+            ((= old 2) ht!1!num_entries)
+            (else ht!0!num_entries))
+          (cond ((= old 1) 32) ((= old 2) 64) (else 128)))
+        (or
+          (and
+            (= old 1)
+            (or
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                0)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                8)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                16)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                24)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                32)))
+          (and
+            (= old 2)
+            (or
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                0)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                8)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                16)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                24)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                32)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                40)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                48)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                56)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                64)))
+          (and
+            (= old 3)
+            (or
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                0)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                8)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                16)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                24)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                32)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                40)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                48)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                56)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                64)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                72)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                80)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                88)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                96)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                104)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                112)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                120)
+              (=
+                (-
+                  (cond
+                    ((= old 3) ht!2!num_entries)
+                    ((= old 2) ht!1!num_entries)
+                    (else ht!0!num_entries))
+                  (cond
+                    ((= old 3) ht!2!num_to_migrate)
+                    ((= old 2) ht!1!num_to_migrate)
+                    (else ht!0!num_to_migrate)))
+                128)))
+          (=
+            (-
+              (cond
+                ((= old 3) ht!2!num_entries)
+                ((= old 2) ht!1!num_entries)
+                (else ht!0!num_entries))
+              (cond
+                ((= old 3) ht!2!num_to_migrate)
+                ((= old 2) ht!1!num_to_migrate)
+                (else ht!0!num_to_migrate)))
+            (cond
+              ((= old 3) ht!2!num_entries)
+              ((= old 2) ht!1!num_entries)
+              (else ht!0!num_entries))))))
+

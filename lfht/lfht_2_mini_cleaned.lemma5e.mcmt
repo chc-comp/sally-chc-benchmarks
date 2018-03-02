@@ -1,0 +1,9 @@
+;; lemma5e
+(query T
+      (and
+        (or (not (< ht!0!num_entries (/ 96 5))) (not ht!0!assimilated))
+        (or (not (< ht!1!num_entries (/ 192 5))) (not ht!1!assimilated))
+        (or
+          (not (< ht!2!num_entries (/ 384 5)))
+          (not ht!2!assimilated))))
+

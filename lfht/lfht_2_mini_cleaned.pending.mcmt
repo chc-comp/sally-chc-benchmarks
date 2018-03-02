@@ -1,0 +1,3 @@
+;; pending
+(query T (= pending (+ (ite (= pc!0 1) 1 0) (ite (= pc!1 1) 1 0))))
+

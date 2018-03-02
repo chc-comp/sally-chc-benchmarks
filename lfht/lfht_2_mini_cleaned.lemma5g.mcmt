@@ -1,0 +1,7 @@
+;; lemma5g
+(query T
+      (and
+        (or (not ht!0!assimilated) (= ht!0!num_to_migrate 0))
+        (or (not ht!1!assimilated) (= ht!1!num_to_migrate 0))
+        (or (not ht!2!assimilated) (= ht!2!num_to_migrate 0))))
+

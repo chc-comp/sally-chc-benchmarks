@@ -1,0 +1,22 @@
+;; lemma2
+(query T
+      (and
+        (or
+          (<= 1 new)
+          (and
+            (= ht!0!num_entries 0)
+            (= ht!0!num_to_migrate 0)
+            (not ht!0!assimilated)))
+        (or
+          (<= 2 new)
+          (and
+            (= ht!1!num_entries 0)
+            (= ht!1!num_to_migrate 0)
+            (not ht!1!assimilated)))
+        (or
+          (<= 3 new)
+          (and
+            (= ht!2!num_entries 0)
+            (= ht!2!num_to_migrate 0)
+            (not ht!2!assimilated)))))
+

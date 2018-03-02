@@ -1,0 +1,17 @@
+;; upper_strengthening_1
+(query T
+      (or
+        (= old new)
+        (<
+          (cond
+            ((= old 3) ht!2!num_to_migrate)
+            ((= old 2) ht!1!num_to_migrate)
+            (else ht!0!num_to_migrate))
+          8)
+        (=
+          (cond
+            ((= new 3) ht!2!num_entries)
+            ((= new 2) ht!1!num_entries)
+            (else ht!0!num_entries))
+          (+ (* paid_tax 8) posted))))
+

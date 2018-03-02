@@ -1,0 +1,10 @@
+;; posted_1
+(query T
+      (or
+        (= old new)
+        (cond
+          ((= old 3) ht!2!assimilated)
+          ((= old 2) ht!1!assimilated)
+          (else ht!0!assimilated))
+        (= (+ posted pending) (+ paid_tax did_not_pay))))
+

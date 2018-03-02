@@ -1,0 +1,8 @@
+;; lemma5a
+(query T
+      (not
+        (cond
+          ((= new 3) ht!2!assimilated)
+          ((= new 2) ht!1!assimilated)
+          (else ht!0!assimilated))))
+

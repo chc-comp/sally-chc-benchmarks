@@ -1,0 +1,89 @@
+;; notes:
+;; pc!0 and pc!1 have type (subrange 0 2)
+(define-state-type state
+  ((success!0 Bool)
+   (success!1 Bool)
+   (value!0 Real)
+   (value!1 Real)
+   (state_read!0 Real)
+   (state_read!1 Real)
+   (pc!0 Real)
+   (pc!1 Real)
+   (state Real))
+)
+
+(define-states initial_states state
+  (and
+   (= state 0)
+   (= success!0 false)
+   (= success!1 false)
+   (= pc!0 0)
+   (= pc!1 0)
+   (= value!0 0)
+   (= value!1 0)
+   (= state_read!0 0)
+   (= state_read!1 0)))
+
+(define-transition transition state
+  (let ((cs!59 (+ state 1))
+	(cs!62 (= state' state))
+	(cs!64 (= success!1' success!1))
+	(cs!69 (= success!0' success!0)))
+    (let ((cs!60 (= state state_read!1))
+	  (cs!61 (= pc!1' pc!1))
+	  (cs!63 (= state_read!1' state_read!1))
+	  (cs!65 (= value!1' value!1))
+	  (cs!66 (= state_read!0' state_read!0))
+	  (cs!67 (= pc!0' pc!0))
+	  (cs!68 (= value!0' value!0))
+	  (cs!70 (= state state_read!0)))
+      (or
+       (and
+	(or
+	 (and
+	  (= pc!0 0)
+	  (= state_read!0' state)
+	  (= value!0' cs!59)
+	  (= pc!0' 1)
+	  cs!62
+	  cs!69)
+	 (and
+	  (= pc!0 1)
+	  (= state' (ite cs!70 value!0 state))
+	  (= success!0' cs!70)
+	  (= pc!0' 2)
+	  cs!66
+	  cs!68)
+	 (and (= pc!0 2) cs!67 cs!62 cs!66 cs!69 cs!68))
+	cs!63
+	cs!61
+	cs!65
+	cs!64)
+       (and
+	(or
+	 (and
+	  (= pc!1 0)
+	  (= state_read!1' state)
+	  (= value!1' cs!59)
+	  (= pc!1' 1)
+	  cs!62
+	  cs!64)
+	 (and
+	  (= pc!1 1)
+	  (= state' (ite cs!60 value!1 state))
+	  (= success!1' cs!60)
+	  (= pc!1' 2)
+	  cs!63
+	  cs!65)
+	 (and (= pc!1 2) cs!61 cs!62 cs!63 cs!64 cs!65))
+	cs!66
+	cs!67
+	cs!68
+	cs!69)))))
+
+(define-transition-system inc_cas state initial_states transition)
+
+(query inc_cas
+      (or
+        (and (not success!0) (not success!1))
+        (not (<= state 0))))

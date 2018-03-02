@@ -1,0 +1,3 @@
+;; paid_tax_1
+(query T (not (< paid_tax 0)))
+

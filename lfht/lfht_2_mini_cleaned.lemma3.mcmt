@@ -1,0 +1,7 @@
+;; lemma3
+(query T
+      (and
+        (<= ht!0!num_to_migrate ht!0!num_entries)
+        (<= ht!1!num_to_migrate ht!1!num_entries)
+        (<= ht!2!num_to_migrate ht!2!num_entries)))
+

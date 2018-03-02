@@ -1,0 +1,4 @@
+;; lemma1
+(query T
+    (or (and (= new 1) (= old 1)) (= new (+ old 1))))
+

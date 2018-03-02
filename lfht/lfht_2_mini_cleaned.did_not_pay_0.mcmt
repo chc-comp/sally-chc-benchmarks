@@ -1,0 +1,3 @@
+;; did_not_pay_0
+(query T (or (/= old new) (= did_not_pay 0)))
+

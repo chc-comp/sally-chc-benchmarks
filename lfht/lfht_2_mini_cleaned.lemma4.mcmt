@@ -1,0 +1,7 @@
+;; lemma4
+(query T
+      (or
+        (and (= new 1) (= K 32))
+        (and (= new 2) (= K 64))
+        (and (= new 3) (= K 128))))
+

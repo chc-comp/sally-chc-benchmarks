@@ -1,0 +1,446 @@
+;; index is a natural number
+;; many variables have type index (elem!ptr, head!ptr, mem!0!ptr, etc)
+;; pc_d and pc_e have type subrange 0 4
+(define-state-type state
+   ((elem!aba Real)
+    (elem!ptr Real)
+    (elem!val Real)
+    (head!aba Real)
+    (head!ptr Real)
+    (head!val Real)
+    (last Real)
+    (last_o Real)
+    (mem!0!aba Real)
+    (mem!0!ptr Real)
+    (mem!0!val Real)
+    (mem!1!aba Real)
+    (mem!1!ptr Real)
+    (mem!1!val Real)
+    (mem!2!aba Real)
+    (mem!2!ptr Real)
+    (mem!2!val Real)
+    (mem!3!aba Real)
+    (mem!3!ptr Real)
+    (mem!3!val Real)
+    (mem!4!aba Real)
+    (mem!4!ptr Real)
+    (mem!4!val Real)
+    (mem!5!aba Real)
+    (mem!5!ptr Real)
+    (mem!5!val Real)
+    (mem!6!aba Real)
+    (mem!6!ptr Real)
+    (mem!6!val Real)
+    (mem!7!aba Real)
+    (mem!7!ptr Real)
+    (mem!7!val Real)
+    (mem!8!aba Real)
+    (mem!8!ptr Real)
+    (mem!8!val Real)
+    (mem!9!aba Real)
+    (mem!9!ptr Real)
+    (mem!9!val Real)
+    (new!aba Real)
+    (new!ptr Real)
+    (new!val Real)
+    (next!aba Real)
+    (next!ptr Real)
+    (next!val Real)
+    (ok Bool)
+    (old!aba Real)
+    (old!ptr Real)
+    (old!val Real)
+    (pc_d Real)
+    (pc_e Real)
+    (queue!aba Real)
+    (queue!ptr Real)
+    (queue!val Real))
+)
+
+(define-states initial_states state
+        (and
+          (= pc_d 0)
+          (= queue!aba 0)
+          (= queue!ptr 0)
+          (= queue!val 0)
+          (= mem!0!aba 0)
+          (= mem!0!ptr 0)
+          (= mem!0!val 0)
+          (= mem!1!aba 0)
+          (= mem!1!ptr 0)
+          (= mem!1!val 0)
+          (= mem!2!aba 0)
+          (= mem!2!ptr 0)
+          (= mem!2!val 0)
+          (= mem!3!aba 0)
+          (= mem!3!ptr 0)
+          (= mem!3!val 0)
+          (= mem!4!aba 0)
+          (= mem!4!ptr 0)
+          (= mem!4!val 0)
+          (= mem!5!aba 0)
+          (= mem!5!ptr 0)
+          (= mem!5!val 0)
+          (= mem!6!aba 0)
+          (= mem!6!ptr 0)
+          (= mem!6!val 0)
+          (= mem!7!aba 0)
+          (= mem!7!ptr 0)
+          (= mem!7!val 0)
+          (= mem!8!aba 0)
+          (= mem!8!ptr 0)
+          (= mem!8!val 0)
+          (= mem!9!aba 0)
+          (= mem!9!ptr 0)
+          (= mem!9!val 0)
+          (= pc_e 0)
+          (= elem!aba 0)
+          (= elem!ptr 2)
+          (= elem!val 33)
+          (= last_o 0)
+          (= ok true))
+)
+
+(define-transition transition state
+        (let ((cs!115 (< last last_o))
+              (cs!119 (/= pc_d 3))
+              (cs!120 (<= last_o 0))
+              (cs!121 (= last_o' last_o))
+              (cs!122 (= pc_d 1))
+              (cs!126 (= pc_d 2))
+              (cs!127 (= pc_d' 0))
+              (cs!131 (= pc_e 3))
+              (cs!132 (= pc_e' 0))
+              (cs!133 (= pc_e 4))
+              (cs!135
+                    (and
+                      (= elem!aba' elem!aba)
+                      (= elem!ptr' elem!ptr)
+                      (= elem!val' elem!val)))
+              (cs!136
+                    (and
+                      (= mem!0!aba' mem!0!aba)
+                      (= mem!0!ptr' mem!0!ptr)
+                      (= mem!0!val' mem!0!val)
+                      (= mem!1!aba' mem!1!aba)
+                      (= mem!1!ptr' mem!1!ptr)
+                      (= mem!1!val' mem!1!val)
+                      (= mem!2!aba' mem!2!aba)
+                      (= mem!2!ptr' mem!2!ptr)
+                      (= mem!2!val' mem!2!val)
+                      (= mem!3!aba' mem!3!aba)
+                      (= mem!3!ptr' mem!3!ptr)
+                      (= mem!3!val' mem!3!val)
+                      (= mem!4!aba' mem!4!aba)
+                      (= mem!4!ptr' mem!4!ptr)
+                      (= mem!4!val' mem!4!val)
+                      (= mem!5!aba' mem!5!aba)
+                      (= mem!5!ptr' mem!5!ptr)
+                      (= mem!5!val' mem!5!val)
+                      (= mem!6!aba' mem!6!aba)
+                      (= mem!6!ptr' mem!6!ptr)
+                      (= mem!6!val' mem!6!val)
+                      (= mem!7!aba' mem!7!aba)
+                      (= mem!7!ptr' mem!7!ptr)
+                      (= mem!7!val' mem!7!val)
+                      (= mem!8!aba' mem!8!aba)
+                      (= mem!8!ptr' mem!8!ptr)
+                      (= mem!8!val' mem!8!val)
+                      (= mem!9!aba' mem!9!aba)
+                      (= mem!9!ptr' mem!9!ptr)
+                      (= mem!9!val' mem!9!val)))
+              (cs!137
+                    (and
+                      (= new!aba' new!aba)
+                      (= new!ptr' new!ptr)
+                      (= new!val' new!val)))
+              (cs!138
+                    (and
+                      (= old!aba' old!aba)
+                      (= old!ptr' old!ptr)
+                      (= old!val' old!val)))
+              (cs!139 (= pc_e' pc_e))
+              (cs!140
+                    (and
+                      (= queue!aba' queue!aba)
+                      (= queue!ptr' queue!ptr)
+                      (= queue!val' queue!val)))
+              (cs!141 (= last' last))
+              (cs!142
+                    (and
+                      (= next!aba' next!aba)
+                      (= next!ptr' next!ptr)
+                      (= next!val' next!val)))
+              (cs!143
+                    (and
+                      (= head!aba' head!aba)
+                      (= head!ptr' head!ptr)
+                      (= head!val' head!val)))
+              (cs!144 (= pc_d' pc_d))
+              (cs!145 (= pc_d 3)))
+          (let ((cs!118 (not cs!115))
+                (cond!1 (= head!ptr 2))
+                (cond!2 (= head!ptr 3))
+                (cond!3 (= head!ptr 4))
+                (cond!4 (= head!ptr 5))
+                (cond!5 (= head!ptr 6))
+                (cond!6 (= head!ptr 7))
+                (cond!7 (= head!ptr 8))
+                (cond!8 (= head!ptr 9))
+                (cond!9 (= head!ptr 10))
+                (cond!10 (= elem!ptr 2))
+                (cond!11 (= elem!ptr 3))
+                (cond!12 (= elem!ptr 4))
+                (cond!13 (= elem!ptr 5))
+                (cond!14 (= elem!ptr 6))
+                (cond!15 (= elem!ptr 7))
+                (cond!16 (= elem!ptr 8))
+                (cond!17 (= elem!ptr 9))
+                (cond!18 (= elem!ptr 10))
+                (cs!134 (< elem!ptr 10))
+                (cond!19 (= elem!ptr 1))
+                (cond!20 (= elem!ptr 2))
+                (cond!21 (= elem!ptr 3))
+                (cond!22 (= elem!ptr 4))
+                (cond!23 (= elem!ptr 5))
+                (cond!24 (= elem!ptr 6))
+                (cond!25 (= elem!ptr 7))
+                (cond!26 (= elem!ptr 8))
+                (cond!27 (= elem!ptr 9))
+                (cond!28 (= elem!ptr 10)))
+            (let ((cs!128
+                       (cond
+                         (cond!18 mem!9!aba)
+                         (cond!17 mem!8!aba)
+                         (cond!16 mem!7!aba)
+                         (cond!15 mem!6!aba)
+                         (cond!14 mem!5!aba)
+                         (cond!13 mem!4!aba)
+                         (cond!12 mem!3!aba)
+                         (cond!11 mem!2!aba)
+                         (cond!10 mem!1!aba)
+                         (else mem!0!aba)))
+                  (cs!130
+                        (cond
+                          (cond!18 mem!9!val)
+                          (cond!17 mem!8!val)
+                          (cond!16 mem!7!val)
+                          (cond!15 mem!6!val)
+                          (cond!14 mem!5!val)
+                          (cond!13 mem!4!val)
+                          (cond!12 mem!3!val)
+                          (cond!11 mem!2!val)
+                          (cond!10 mem!1!val)
+                          (else mem!0!val))))
+              (and
+                (or
+                  (and
+                    (or
+                      (and
+                        (= pc_d 0)
+                        (= head!aba' queue!aba)
+                        (= head!ptr' queue!ptr)
+                        (= head!val' queue!val)
+                        (= pc_d' 1)
+                        cs!141
+                        cs!136
+                        cs!142
+                        cs!140)
+                      (and
+                        cs!122
+                        (= head!ptr 0)
+                        (= last' 0)
+                        (= pc_d' 4)
+                        cs!143
+                        cs!136
+                        cs!142
+                        cs!140)
+                      (and
+                        cs!122
+                        (/= head!ptr 0)
+                        (= pc_d' 2)
+                        cs!143
+                        cs!141
+                        cs!136
+                        (=
+                          next!aba'
+                          (+
+                            (cond
+                              (cond!9 mem!9!aba)
+                              (cond!8 mem!8!aba)
+                              (cond!7 mem!7!aba)
+                              (cond!6 mem!6!aba)
+                              (cond!5 mem!5!aba)
+                              (cond!4 mem!4!aba)
+                              (cond!3 mem!3!aba)
+                              (cond!2 mem!2!aba)
+                              (cond!1 mem!1!aba)
+                              (else mem!0!aba))
+                            1))
+                        (=
+                          next!ptr'
+                          (cond
+                            (cond!9 mem!9!ptr)
+                            (cond!8 mem!8!ptr)
+                            (cond!7 mem!7!ptr)
+                            (cond!6 mem!6!ptr)
+                            (cond!5 mem!5!ptr)
+                            (cond!4 mem!4!ptr)
+                            (cond!3 mem!3!ptr)
+                            (cond!2 mem!2!ptr)
+                            (cond!1 mem!1!ptr)
+                            (else mem!0!ptr)))
+                        (= next!val' next!val)
+                        cs!140)
+                      (and
+                        cs!126
+                        (= queue!aba head!aba)
+                        (= queue!ptr head!ptr)
+                        (= queue!val head!val)
+                        (= queue!aba' next!aba)
+                        (= queue!ptr' next!ptr)
+                        (= queue!val' next!val)
+                        (= pc_d' 3)
+                        (= last' head!ptr)
+                        cs!143
+                        cs!136
+                        cs!142)
+                      (and
+                        cs!126
+                        (or
+                          (/= queue!aba head!aba)
+                          (/= queue!ptr head!ptr)
+                          (/= queue!val head!val))
+                        cs!127
+                        cs!143
+                        cs!141
+                        cs!136
+                        cs!142
+                        cs!140)
+                      (and cs!145 cs!127 cs!143 cs!141 cs!136 cs!142 cs!140)
+                      (and (= pc_d 4) cs!143 cs!141 cs!136 cs!142 cs!144 cs!140))
+                    cs!135
+                    cs!137
+                    cs!138
+                    cs!139)
+                  (and
+                    (or
+                      (and
+                        (= pc_e 0)
+                        (= old!aba' queue!aba)
+                        (= old!ptr' queue!ptr)
+                        (= old!val' queue!val)
+                        (= pc_e' 1)
+                        cs!135
+                        cs!136
+                        cs!137
+                        cs!140)
+                      (and
+                        (= pc_e 1)
+                        (= pc_e' 2)
+                        cs!135
+                        (= mem!0!aba' (ite cond!19 cs!128 mem!0!aba))
+                        (= mem!0!ptr' (ite cond!19 old!ptr mem!0!ptr))
+                        (= mem!0!val' (ite cond!19 (+ cs!130 1) mem!0!val))
+                        (= mem!1!aba' (ite cond!20 cs!128 mem!1!aba))
+                        (= mem!1!ptr' (ite cond!20 old!ptr mem!1!ptr))
+                        (= mem!1!val' (ite cond!20 (+ cs!130 1) mem!1!val))
+                        (= mem!2!aba' (ite cond!21 cs!128 mem!2!aba))
+                        (= mem!2!ptr' (ite cond!21 old!ptr mem!2!ptr))
+                        (= mem!2!val' (ite cond!21 (+ cs!130 1) mem!2!val))
+                        (= mem!3!aba' (ite cond!22 cs!128 mem!3!aba))
+                        (= mem!3!ptr' (ite cond!22 old!ptr mem!3!ptr))
+                        (= mem!3!val' (ite cond!22 (+ cs!130 1) mem!3!val))
+                        (= mem!4!aba' (ite cond!23 cs!128 mem!4!aba))
+                        (= mem!4!ptr' (ite cond!23 old!ptr mem!4!ptr))
+                        (= mem!4!val' (ite cond!23 (+ cs!130 1) mem!4!val))
+                        (= mem!5!aba' (ite cond!24 cs!128 mem!5!aba))
+                        (= mem!5!ptr' (ite cond!24 old!ptr mem!5!ptr))
+                        (= mem!5!val' (ite cond!24 (+ cs!130 1) mem!5!val))
+                        (= mem!6!aba' (ite cond!25 cs!128 mem!6!aba))
+                        (= mem!6!ptr' (ite cond!25 old!ptr mem!6!ptr))
+                        (= mem!6!val' (ite cond!25 (+ cs!130 1) mem!6!val))
+                        (= mem!7!aba' (ite cond!26 cs!128 mem!7!aba))
+                        (= mem!7!ptr' (ite cond!26 old!ptr mem!7!ptr))
+                        (= mem!7!val' (ite cond!26 (+ cs!130 1) mem!7!val))
+                        (= mem!8!aba' (ite cond!27 cs!128 mem!8!aba))
+                        (= mem!8!ptr' (ite cond!27 old!ptr mem!8!ptr))
+                        (= mem!8!val' (ite cond!27 (+ cs!130 1) mem!8!val))
+                        (= mem!9!aba' (ite cond!28 cs!128 mem!9!aba))
+                        (= mem!9!ptr' (ite cond!28 old!ptr mem!9!ptr))
+                        (= mem!9!val' (ite cond!28 (+ cs!130 1) mem!9!val))
+                        cs!137
+                        cs!138
+                        cs!140)
+                      (and
+                        (= pc_e 2)
+                        (= pc_e' 3)
+                        cs!135
+                        cs!136
+                        (= new!aba' (+ old!aba 1))
+                        (= new!ptr' elem!ptr)
+                        (= new!val' new!val)
+                        cs!138
+                        cs!140)
+                      (and
+                        cs!131
+                        (= queue!aba old!aba)
+                        (= queue!ptr old!ptr)
+                        (= queue!val old!val)
+                        (= queue!aba' new!aba)
+                        (= queue!ptr' new!ptr)
+                        (= queue!val' new!val)
+                        (= pc_e' 4)
+                        cs!135
+                        cs!136
+                        cs!137
+                        cs!138)
+                      (and
+                        cs!131
+                        (or
+                          (/= queue!aba old!aba)
+                          (/= queue!ptr old!ptr)
+                          (/= queue!val old!val))
+                        cs!132
+                        cs!135
+                        cs!136
+                        cs!137
+                        cs!138
+                        cs!140)
+                      (and
+                        cs!133
+                        cs!134
+                        cs!132
+                        (= elem!aba' elem!aba)
+                        (= elem!ptr' (+ elem!ptr 1))
+                        (= elem!val' elem!val)
+                        cs!136
+                        cs!137
+                        cs!138
+                        cs!140)
+                      (and
+                        cs!133
+                        (not cs!134)
+                        cs!135
+                        cs!136
+                        cs!137
+                        cs!138
+                        cs!139
+                        cs!140))
+                    cs!141
+                    cs!142
+                    cs!143
+                    cs!144))
+                (or
+                  (and cs!145 cs!115 (= last_o' last) (= ok' true))
+                  (and cs!145 cs!118 (not cs!120) (= ok' false) cs!121)
+                  (and
+                    (or cs!119 cs!118)
+                    (or cs!119 cs!115 cs!120)
+                    cs!121
+                    (= ok' ok)))))))
+)
+
+(define-transition-system frolloc_lifo state initial_states transition)
+
+(query frolloc_lifo ok)

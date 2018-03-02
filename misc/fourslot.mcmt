@@ -1,0 +1,235 @@
+;; notes: item is [0 .. 3]
+;; rpc has type (subrange 0 3)
+;; wpc has type (subrange 0 4)
+(define-state-type state
+  ((index!0 Bool)
+   (index!1 Bool)
+   (latest Bool)
+   (out Real)
+   (reading Bool)
+   (rindex Bool)
+   (rpair Bool)
+   (rpc Real)
+   (slot!0!0 Real)
+   (slot!0!1 Real)
+   (slot!1!0 Real)
+   (slot!1!1 Real)
+   (windex Bool)
+   (wpair Bool)
+   (wpc Real))
+)
+
+(define-states initial_states state
+  (and
+   (= reading false)
+   (= rpair false)
+   (= rindex false)
+   (= out 0)
+   (= rpc 0)
+   (= latest false)
+   (= wpair false)
+   (= windex false)
+   (= wpc 0)
+   (= index!1 false)
+   (= index!0 false)
+   (= slot!0!0 0)
+   (= slot!0!1 0)
+   (= slot!1!0 0)
+   (= slot!1!1 0)))
+
+
+(define-transition transition state
+  (let ((cs!86 (= rpc 0))
+	(cs!87 (= rpc' 1))
+	(cs!88 (= rpc 2))
+	(cs!89 (= rpc' 3))
+	(cs!90 (= wpc 0))
+	(cs!91 (= rpc 1))
+	(cs!92 (= wpc' 1))
+	(cs!93 (ite wpair slot!1!0 slot!0!0))
+	(cs!94 (ite wpair slot!1!1 slot!0!1))
+	(cs!95 (= wpc 3))
+	(cs!96 (= latest' latest))
+	(cs!97 (= wpc 4))
+	(cs!98 (and (= index!0' index!0) (= index!1' index!1)))
+	(cs!99 
+	 (and
+	  (= slot!0!0' slot!0!0)
+	  (= slot!0!1' slot!0!1)
+	  (= slot!1!0' slot!1!0)
+	  (= slot!1!1' slot!1!1)))
+	(cs!100 (= windex' windex))
+	(cs!101 (= wpair' wpair))
+	(cs!102 (= out' out))
+	(cs!103 (= rindex' rindex))
+	(cs!104 (= rpair' rpair))
+	(cs!105 (= reading' reading))
+	(cond!1 (not windex))
+	(cond!2 (not wpair))
+	(cond!3 (not windex))
+	(cond!4 (not wpair))
+	(cond!5 (not windex))
+	(cond!6 (not wpair))
+	(cond!7 (not windex))
+	(cond!8 (not wpair)))
+    (or
+     (and
+      (or
+       (and
+	cs!86
+	(/= wpc 4)
+	(= rpair' latest)
+	cs!87
+	cs!102
+	cs!105
+	cs!103)
+       (and cs!86 cs!97 (= rpair' true) cs!87 cs!102 cs!105 cs!103)
+       (and
+	cs!86
+	cs!97
+	(= rpair' false)
+	cs!87
+	cs!102
+	cs!105
+	cs!103)
+       (and
+	cs!91
+	(= reading' rpair)
+	(= rpc' 2)
+	cs!102
+	cs!103
+	cs!104)
+       (and
+	cs!88
+	(/= wpc 3)
+	(= rindex' (ite rpair index!1 index!0))
+	cs!89
+	cs!102
+	cs!105
+	cs!104)
+       (and
+	cs!88
+	cs!95
+	(= rindex' true)
+	cs!89
+	cs!102
+	cs!105
+	cs!104)
+       (and
+	cs!88
+	cs!95
+	(= rindex' false)
+	cs!89
+	cs!102
+	cs!105
+	cs!104)
+       (and
+	(= rpc 3)
+	(=
+	 out'
+	 (cond
+	  (rindex (ite rpair slot!1!1 slot!0!1))
+	  (rpair slot!1!0)
+	  (else slot!0!0)))
+	(= rpc' 0)
+	cs!105
+	cs!103
+	cs!104))
+      (= wpc' wpc)
+      cs!100
+      cs!101
+      cs!99
+      cs!98
+      cs!96)
+     (and
+      (or
+       (and
+	cs!90
+	(/= rpc 1)
+	(= wpair' (not reading))
+	cs!92
+	cs!98
+	cs!96
+	cs!99
+	cs!100)
+       (and
+	cs!90
+	cs!91
+	cs!92
+	cs!98
+	cs!96
+	cs!99
+	cs!100
+	(or (= wpair' false) (= wpair' true)))
+       (and
+	(= wpc 1)
+	(= windex' (not (ite wpair index!1 index!0)))
+	(= wpc' 2)
+	cs!98
+	cs!96
+	cs!99
+	cs!101)
+       (and
+	(= wpc 2)
+	(= wpc' 3)
+	cs!98
+	cs!96
+	cs!100
+	cs!101
+	(or
+	 (and
+	  (= slot!0!0' (ite cond!2 (ite cond!1 0 cs!93) slot!0!0))
+	  (= slot!0!1' (ite cond!2 (ite windex 0 cs!94) slot!0!1))
+	  (= slot!1!0' (ite wpair (ite cond!1 0 cs!93) slot!1!0))
+	  (= slot!1!1' (ite wpair (ite windex 0 cs!94) slot!1!1)))
+	 (and
+	  (= slot!0!0' (ite cond!4 (ite cond!3 1 cs!93) slot!0!0))
+	  (= slot!0!1' (ite cond!4 (ite windex 1 cs!94) slot!0!1))
+	  (= slot!1!0' (ite wpair (ite cond!3 1 cs!93) slot!1!0))
+	  (= slot!1!1' (ite wpair (ite windex 1 cs!94) slot!1!1)))
+	 (and
+	  (= slot!0!0' (ite cond!6 (ite cond!5 2 cs!93) slot!0!0))
+	  (= slot!0!1' (ite cond!6 (ite windex 2 cs!94) slot!0!1))
+	  (= slot!1!0' (ite wpair (ite cond!5 2 cs!93) slot!1!0))
+	  (= slot!1!1' (ite wpair (ite windex 2 cs!94) slot!1!1)))
+	 (and
+	  (= slot!0!0' (ite cond!8 (ite cond!7 3 cs!93) slot!0!0))
+	  (= slot!0!1' (ite cond!8 (ite windex 3 cs!94) slot!0!1))
+	  (= slot!1!0' (ite wpair (ite cond!7 3 cs!93) slot!1!0))
+	  (= slot!1!1' (ite wpair (ite windex 3 cs!94) slot!1!1)))))
+       (and
+	cs!95
+	(= wpc' 4)
+	(= index!0' (ite (not wpair) windex index!0))
+	(= index!1' (ite wpair windex index!1))
+	cs!96
+	cs!99
+	cs!100
+	cs!101)
+       (and
+	cs!97
+	(= latest' wpair)
+	(= wpc' 0)
+	cs!98
+	cs!99
+	cs!100
+	cs!101))
+      cs!102
+      (= rpc' rpc)
+      cs!103
+      cs!104
+      cs!105))))
+
+(define-transition-system fourslots state
+  initial_states transition)
+
+;;
+;; property
+;;
+
+(query fourslots
+      (or
+        (/= wpc 2)
+        (/= rpc 3)
+        (/= wpair rpair)
+        (/= windex rindex)))

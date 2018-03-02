@@ -1,0 +1,12 @@
+;; lemma0
+(query T
+      (or
+        (/= pc!0 3)
+        (/= pc!1 3)
+        (<=
+          (cond
+            ((= new 3) ht!2!num_entries)
+            ((= new 2) ht!1!num_entries)
+            (else ht!0!num_entries))
+          (* K (/ 3 5)))))
+
